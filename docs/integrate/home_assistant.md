@@ -1,8 +1,8 @@
 # Integrate Home Assistant
 
-Home Assistant provide the [MQTT integration](https://www.home-assistant.io/integrations/mqtt/) and through this integration it is possible to exploit and manage the messages published by OpenMQTTGateway.
+Home Assistant provides the [MQTT integration](https://www.home-assistant.io/integrations/mqtt/) and through this integration it is possible to exploit and manage the messages published by OpenMQTTGateway.
 
-Once this integration on home assistant is configured with the same MQTT broker, it is possible to create devices manually or through the autodiscovery function.
+Once this integration on Home Assistant is configured with the same MQTT broker, it is possible to create devices manually or through the autodiscovery function.
 
 
 ## Auto discovery
@@ -17,7 +17,7 @@ Enable discovery on your MQTT integration in HASS (activated per default).
 
 ![Home Assistant Auto Discovery](../img/OpenMQTTGateway-Configuration-Home-Assistant-Discovery-Integration.png)
 
-The gateway will need an MQTT username and password, you have to create a new user (recommended) into Home Assistant->Configuration->Users (available in admin mode) or use an existing username/pwd combination (not recommended). This user doesn't need to be an administrator.
+The gateway will need a MQTT username and password, you have to create a new user (recommended) into Home Assistant->Configuration->Users (available in admin mode) or use an existing username/pwd combination (not recommended). This user doesn't need to be an administrator.
 
 ![Home Assistant Auto Discovery](../img/OpenMQTTGateway-Configuration-Home-Assistant.png)
 
@@ -25,7 +25,7 @@ The gateway will need an MQTT username and password, you have to create a new us
 The max size of the username and password is 64 characters.
 :::
 
-OMG will use the auto discovery functionality of home assistant to create gateway and sensors into your HASS instance automatically.
+OMG will use the auto discovery functionality of Home Assistant to create gateway and sensors into your HASS instance automatically.
 
 ![Home Assistant Auto Discovery](../img/OpenMQTTGateway_auto_discovery_Gateway_Home_Assistant.gif)
 
@@ -37,9 +37,12 @@ OMG will use the auto discovery functionality of home assistant to create gatewa
 The Bluetooth and the RTL_433 gateway will automatically create devices and entities, the RF gateway will create DeviceTrigger.
 The OpenMQTTGateway will also be available as a device to monitor its parameters and control it. The sensors (DHT for example) and actuators (relays) are attached to the gateway.
 
-On first and subsequent startups, auto discovery will start. If you want to prevent this from happening, be sure to manually turn off auto discovery, either by using the UI in Home Assistant, or by publishing to the home/<gatewayname>/commands/MQTTtoSYS/config topic.
+On first and subsequent startups, auto discovery will start. If you want to prevent this from happening, be sure to manually turn off auto discovery, either by using the UI in Home Assistant, or by publishing to the home/<gatewayname>/commands/MQTTtoSYS/config topic. If you do this within the 30 minute time window, auto discovery will no longer enable automatically.
+
 30 minutes after its activation the auto discovery will be automatically deactivated, you can reactivate it from the gateway controls. 
 Some devices may require a button push or motion/contact event to trigger a message and generate the auto discovery.
+
+If you rename the MQTT Base Topic in OMG gateway, do *not* change it to "homeassistant/" This is the default topic used internally for autodiscovery and things will go badly wrong if you do this.
 :::
 
 ## RTL_433 auto discovery specificity
